@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <title>Passing Paraments</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script th:inline="javascript">
+        function ShowMessage(){
+            document.getElementById("message2").innerHTML = "Thymeleaf String by JS: " + [[${message2}]];
+            var user = /*[[${user}]]*/ null ;
+            document.getElementById("user").innerHTML = "Thymeleaf Beans by JS: name ->"+ user.name +", age -> "+ user.age.toString();
+        }
+    </script>
+</head>
+
+<body>
+<p th:text="${message1}">test</p>
+<p id="message2"></p>
+<p th:text="'name: ' + ${user.name} +', age: ' + ${user.age}"></p>
+<p id="user"></p>
+<button onclick="ShowMessage()">Show Message From Java</button>
+</body>
+
+</html>

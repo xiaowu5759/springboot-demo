@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+<input id="name" type="text">
+<input id="pwd" type="text">
+<!--<td th:text="${name}">name</td>-->
+<!--<td th:text="${password}">pwd</td>-->
+<p id="test"></p>
+<p id="user"></p>
+<p id="demo"></p>
+
+<button id="bt" onclick="showInfo()">确定</button>
+
+
+<script>
+    // $("#bt").click(
+    //     function () {
+    //         $.ajax(
+    //             {
+    //                 url:"/user/show/"+$("#name").val()+"/"+$("#pwd").val(),
+    //                 // method:"POST",
+    //                 // success:function (result) {
+    //                 //     alert(result);
+    //                 // }
+    //             }
+    //
+    //         )
+    //
+    //     }
+    // );
+    function showInfo() {
+        var name = document.getElementById("name").value;
+        var pwd = document.getElementById("pwd").value;
+        // ajax技术影响页面跳转
+        location.href = "/user/show/"+name+"/"+pwd
+        // $.ajax(
+        //     {
+        //         url: "/user/show/"+name+"/"+pwd,
+        //         // type: "POST",
+        //         // dataType:"text",
+        //         // async:false,
+        //         // success: successFunction,
+        //     })
+
+    }
+
+    // function successFunction(result) {
+    //     // alert(result);
+    //     document.getElementById("test").innerHTML = "yes";
+    //     // var obj = JSON.parse(result);
+    //     var text = result;
+    //     // alert(result);
+    //     var obj = JSON.stringify(text);
+    //     // alert(obj);
+    //     document.getElementById("user").innerHTML = obj;
+    //     document.getElementById("demo").innerHTML = text.name + "" + text.pwd;
+    // }
+</script>
+
+</body>
+</html>

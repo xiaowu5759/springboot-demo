@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+
+<input id="name" type="text">
+<button onclick="queryByName()"></button>
+
+<script>
+    function queryByName() {
+        var name = document.getElementById("name").value;
+        location.href = "/student/{name}";
+    }
+</script>
+
+</body>
+</html>

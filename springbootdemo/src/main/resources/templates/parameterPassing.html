@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/xiaowu/js/jquery.min.js"></script>
+</head>
+<body>
+<h2>测试参数传递</h2>
+<button id = "bt1">get传递String</button>
+<button id = "bt2">post传递String</button>
+<button id = "bt3">post传递引用类型</button>
+<input id="in1" type="text">
+</body>
+<script>
+    $("#bt1").click(
+        function () {
+            $.ajax(
+                {
+                    url:"/xiaowu/parameter/getString/"+$("#in1").val(),
+                    method:"GET",
+                    success:function (result) {
+                        alert(result);
+                    }
+                }
+            )
+        }
+    );
+    $("#bt2").click(
+        function () {
+            $.ajax(
+                {
+                    url:"/xiaowu/parameter/postString/"+$("#in1").val(),
+                    method:"POST",
+                    success:function (result) {
+                        alert(result);
+                    }
+                }
+            )
+        }
+    );
+    $("#bt3").click(
+        function () {
+            var accountInfo = {
+                accountId: 123,
+                name: $("#in1").val(),
+                pwd: "root",
+                balance: 123
+            };
+            $.ajax(
+                {
+                    url: "/xiaowu/parameter/postAccount",
+                    method: "POST",
+                    data: JSON.stringify(accountInfo),
+                    contentType:"application/json",
+                    success: function (result) {
+                        alert(JSON.stringify(result));
+                    }
+                }
+            );
+        }
+    );
+</script>
+</html>

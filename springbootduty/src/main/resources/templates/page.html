@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>xiaowu</title>
+    <script src="/js/jquery.min.js"></script>
+</head>
+<body>
+<h2>请选择文件</h2>
+<button id="bt">确定</button>
+<!--<input id="in" type="file">-->
+<input id="in" type="text">
+
+</body>
+
+<!--<script>-->
+    <!--$("#bt").onclick(-->
+        <!--alert($("#in").val())-->
+    <!--);-->
+<!--</script>-->
+
+<script>
+    $("#bt").click(
+        function () {
+            $.ajax(
+                {
+                    url:"/param/postString/"+$("#in").val(),
+                    method:"POST",
+                    success:function (result) {
+                        alert(result);
+                    }
+                }
+            )
+        }
+    );
+</script>
+</html>

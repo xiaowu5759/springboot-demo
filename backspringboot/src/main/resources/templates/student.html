@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+
+<input id="name" type="text" >
+<button onclick="queryfunction()">确定</button>
+
+<script>
+    function queryfunction(){
+        var name = document.getElementById("name").value;
+        location.href = "/student/"+name;
+    }
+
+</script>
+
+</body>
+</html>

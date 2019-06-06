@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>xiaowu</title>
+    <script src="/xiaowu/js/jquery.min.js"></script>
+</head>
+<body>
+<h2>请选择文件</h2>
+<button id="bt">确定</button>
+<input id="in" type="text">
+</body>
+<script>
+    $("#bt").click(
+        function () {
+            $.ajax(
+                {
+                    url:"/xiaowu/note/check/"+$("#in").val(),
+                    method:"POST",
+                    success:function (result) {
+                        alert(result);
+                    }
+                }
+            )
+        }
+    );
+</script>
+</html>
