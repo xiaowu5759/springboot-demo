@@ -40,6 +40,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
                         return;
                     }
                 }
+                // TODO:存在逻辑问题 有用户，但是没方法（这之后需要写成如此）
                 else if (ga instanceof MyGrantedAuthority) {
                     MyGrantedAuthority myGrantedAuthority = (MyGrantedAuthority) ga;
                     if (!needRole.equals(myGrantedAuthority.getRole())) {

@@ -50,14 +50,14 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         System.out.println("enter MyFilterInvocationSecurityMetadataSource = " + object);
         // object 是一个URL，被用户请求的url。
-        String requestUrl = ((FilterInvocation) object).getRequestUrl();
+        String url = ((FilterInvocation) object).getRequestUrl();
         String method = ((FilterInvocation) object).getHttpRequest().getMethod();
 //        System.out.println(method);
 //        System.out.println("url" + url);   //url/index  url/favicon.ico
         // 错误页面就不需要权限
-//        if("/error".equals(requestUrl)){
-//            return null;
-//        }
+        if("/error".equals(url)){
+            return null;
+        }
         // 登录页面不走这里
         // 登录页面就不需要权限
 //        if("/login".equals(requestUrl) || "/auth/login".equals(requestUrl)){
@@ -69,7 +69,7 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
         // 获取资源权限列表
         PermissionExample permissionExample = new PermissionExample();
         PermissionExample.Criteria permissionExampleCriteria = permissionExample.createCriteria();
-        permissionExampleCriteria.andUrlEqualTo(requestUrl);
+        permissionExampleCriteria.andUrlEqualTo(url).andMethodEqualTo(method);
         List<Permission> permissionList = permissionMapper.selectByExample(permissionExample);
         // 如果不在权限表中  就不需要权限 不在权限表里面，就不过判定
         if (permissionList.size() == 0) {
@@ -77,7 +77,14 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
         }
         // 存在访问url,方法却不对，应该提示方法异常
         // 而且要支持 “ALL” 访问权限
-        // TODO: 存在逻辑问题, 我们可以把验证放在下一层中
+//         TO/DO: 存在逻辑问题, 我们可以把验证放在下一层中
+        // 这一层难以实现
+        // 这样就不存在ALL method了
+//        for (Permission permission : permissionList){
+//            if(permission.getMethod().equals("ALL")){
+//
+//            }
+//        }
 
 //        // 加上请求方法
 //        permissionExampleCriteria.andMethodEqualTo(method);
