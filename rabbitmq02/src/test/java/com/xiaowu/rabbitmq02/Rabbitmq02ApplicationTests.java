@@ -16,6 +16,15 @@ public class Rabbitmq02ApplicationTests {
     @Autowired
     HelloSend02 helloSend02;
 
+    @Autowired
+    FanoutSender fanoutSender;
+
+    @Autowired
+    DirectSender directSender;
+
+    @Autowired
+    TopicSender topicSender;
+
     @Test
     public void contextLoads(){
         helloSender.send();
@@ -34,6 +43,22 @@ public class Rabbitmq02ApplicationTests {
             helloSender.send2(i);
             helloSend02.send2(i);
         }
+    }
+
+    @Test
+    public void fanoutTest(){
+        fanoutSender.waitSend();
+    }
+
+    @Test
+    public void directTest(){
+        directSender.commonSend();
+    }
+
+    @Test
+    public void topicTest(){
+        topicSender.send1();
+        topicSender.send2();
     }
 
 }

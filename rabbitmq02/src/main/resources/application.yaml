@@ -1,19 +1,55 @@
 spring:
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-    listener:
-      simple:
-        concurrency: 5 # Ïû·Ñ¶Ë×îÐ¡²¢·¢Êý
-        max-concurrency: 10 # Ïû·Ñ¶Ë×î´ó²¢·¢Êý
-        prefetch: 5 # Ò»´ÎÇëÇóÖÐÔ¤´¦ÀíµÄÏûÏ¢ÊýÁ¿
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
+        listener:
+          simple:
+            concurrency: 10
+            max-concurrency: 20
+            prefetch: 5
+
+mq.env: local
+
+log:
+  user:
+    queue.name: ${mq.env}.log.user.queue
+    exchange.name: ${mq.env}.log.user.exchange
+    routing.key.name: ${mq.env}.log.routing.key
+
+#spring.rabbitmq.host=127.0.0.1
+#spring.rabbitmq.port=5672
+#spring.rabbitmq.username=guest
+#spring.rabbitmq.password=guest
+#spring.rabbitmq.listener.simple.concurrency=10
+#spring.rabbitmq.listener.simple.max-concurrency=20
+#spring.rabbitmq.listener.simple.prefetch=5
+#
+#mq.env = local
+#
+#log.user.queue.name: ${mq.env}.log.user.queue
+#log.user.exchange.name: ${mq.env}.log.user.exchange
+#log.user.routing.key.name: ${mq.env}.log.user.routing.key
+
+#spring:
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
+#    virtual-host: /
+#    listener:
+#      simple:
+#        acknowledge-mode: manual # ï¿½Ö¶ï¿½Ó¦ï¿½ï¿½
+#        concurrency: 5 # ï¿½ï¿½ï¿½Ñ¶ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#        max-concurrency: 10 # ï¿½ï¿½ï¿½Ñ¶ï¿½ï¿½ï¿½ó²¢·ï¿½ï¿½ï¿½
+#        prefetch: 5 # Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 #    cache:
 #      channel:
-#        size: 50 # »º´æµÄchannelÊýÁ¿
-### ×Ô¶¨ÒåÅäÖÃ
-mq:
-  defaultExchange: amqpExchange # Ä¬ÈÏ½»»»Æ÷
-  queue: queue # ¶ÓÁÐÃû
-  routeKey: queue_key # Â·ÓÉkey
+#        size: 50 # ï¿½ï¿½ï¿½ï¿½ï¿½channelï¿½ï¿½ï¿½ï¿½
+#### ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#mq:
+#  defaultExchange: amqpExchange # Ä¬ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½
+#  queue: queue # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#  routeKey: queue_key # Â·ï¿½ï¿½key
