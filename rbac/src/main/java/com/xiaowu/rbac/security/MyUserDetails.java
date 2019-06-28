@@ -41,21 +41,25 @@ public class MyUserDetails extends User implements UserDetails {
         return username;
     }
 
+    // 用户是否过期
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    // 账户是否冻结
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    // 密码是否过期，三十天变换密码
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    // 账户是否不可用，假删除，不能恢复，校验逻辑 Service
     @Override
     public boolean isEnabled() {
         return true;
