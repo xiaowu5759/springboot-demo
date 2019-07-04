@@ -13,6 +13,7 @@ import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,8 +24,10 @@ import java.io.IOException;
 @RestController
 @Slf4j
 public class BrowserSecurityController {
+    // 从请求缓存中拿
     private RequestCache requestCache = new HttpSessionRequestCache();
 
+    // 跳转 security的一个工具
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Autowired
@@ -36,9 +39,10 @@ public class BrowserSecurityController {
      * @param response
      * @return
      */
-    @RequestMapping("/authentication/require")
-    @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
+    @RequestMapping(value = "/authentication/require", method = RequestMethod.POST)
+    @ResponseStatus(code = HttpStatus.UNAUTHORIZED)  // 返回的状态码 return
     public SimpleResponse requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
         SavedRequest savedRequest = requestCache.getRequest(request,response);
 
         if (savedRequest != null){
@@ -49,8 +53,10 @@ public class BrowserSecurityController {
                 // 做跳转
                 // 不是永远只传到 标准的登录页
                 redirectStrategy.sendRedirect(request,response,securityProperties.getBrowser().getLoginPage());
-            }
+//                跳转走了，不继续执行
+             }
         }
+
         return new SimpleResponse("访问的服务需要身份验证");
     }
 }

@@ -28,7 +28,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
         // basic登录
 //        http.httpBasic()
+                // /authentication/require
                 .loginPage("/authentication/require")
+                // 处理登录的url是什么
                 .loginProcessingUrl("/authentication/form")
                 .and()
                 // 下面这些 都是授权的配置
