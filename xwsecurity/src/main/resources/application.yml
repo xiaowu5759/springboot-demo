@@ -1,10 +1,13 @@
+server:
+    port: 8060
+
 spring:
     thymeleaf:
         mode: LEGACYHTML5
         cache: false
 
-# ×Ô¶¨ÒåÅäÖÃ
-# ²»ÄÜÎª¿Õ£¬»á±¨´í
+#è‡ªå®šä¹‰
+# ä¸è¦çš„æ—¶å€™è¯·å…¨éƒ¨æ³¨é‡Šï¼Œå¦åˆ™ç©º å¼‚å¸¸
 #xiaowu:
 #    security:
 #        browser:

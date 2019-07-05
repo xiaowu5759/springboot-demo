@@ -4,6 +4,7 @@ package com.xiaowu.xwsecurity.browser;
 import com.xiaowu.xwsecurity.browser.support.SimpleResponse;
 import com.xiaowu.xwsecurity.core.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -11,7 +12,7 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
-import org.springframework.util.StringUtils;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -39,8 +40,8 @@ public class BrowserSecurityController {
      * @param response
      * @return
      */
-    @RequestMapping(value = "/authentication/require", method = RequestMethod.POST)
-    @ResponseStatus(code = HttpStatus.UNAUTHORIZED)  // 返回的状态码 return
+    @RequestMapping(value = "/authentication/require", method = RequestMethod.GET)
+    @ResponseStatus(code = HttpStatus.UNAUTHORIZED)  // 返回的状态码 return 401
     public SimpleResponse requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         SavedRequest savedRequest = requestCache.getRequest(request,response);
@@ -52,11 +53,17 @@ public class BrowserSecurityController {
             if (StringUtils.endsWithIgnoreCase(targetUrl,".html")){
                 // 做跳转
                 // 不是永远只传到 标准的登录页
+                log.info(securityProperties.getBrowser().getLoginPage());
                 redirectStrategy.sendRedirect(request,response,securityProperties.getBrowser().getLoginPage());
 //                跳转走了，不继续执行
              }
         }
 
         return new SimpleResponse("访问的服务需要身份验证");
+    }
+
+    @RequestMapping("/authentication/form")
+    public void login(){
+
     }
 }
